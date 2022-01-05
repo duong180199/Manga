@@ -1,6 +1,9 @@
 package com.example.mangaapp.adapter;
 
+import android.util.Log;
+
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentStatePagerAdapter;
@@ -20,6 +23,7 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int position) {
         switch (position){
             case 0:
+                Log.d("Stromg","dang ky thanh cong");
                 return new HomeFragment();
             case 1:
                 return new CategoryFragment();
@@ -35,4 +39,5 @@ public class ViewPagerAdapter extends FragmentStatePagerAdapter {
     public int getCount() {
         return 4;
     }
+
 }
