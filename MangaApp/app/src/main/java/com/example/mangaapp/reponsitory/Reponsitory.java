@@ -1,9 +1,13 @@
 package com.example.mangaapp.reponsitory;
 
+import android.util.Log;
+
 import com.example.mangaapp.api.Api;
 import com.example.mangaapp.model.Category;
 import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
+
+import java.util.List;
 
 import io.reactivex.Observable;
 import retrofit2.Retrofit;
@@ -16,15 +20,19 @@ public class Reponsitory {
 
     public Reponsitory() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://localhost:4567/")
+                .baseUrl("http://10.0.2.2:4567/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
         api = retrofit.create(Api.class);
     }
 
-    public Observable<Manga> getBanner(){
+    public Observable<List<Manga>> getBanner(){
         return api.getBannerManga();
+    }
+
+    public Observable<List<Manga>> getHotManga(){
+        return api.getHotManga();
     }
 
     public Observable<Manga> getAllManga(){

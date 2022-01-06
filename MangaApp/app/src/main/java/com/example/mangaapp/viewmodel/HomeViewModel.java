@@ -1,10 +1,14 @@
 package com.example.mangaapp.viewmodel;
 
+import android.util.Log;
+
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.mangaapp.model.Manga;
 import com.example.mangaapp.reponsitory.Reponsitory;
+
+import java.util.List;
 
 import io.reactivex.Scheduler;
 import io.reactivex.android.schedulers.AndroidSchedulers;
@@ -15,19 +19,30 @@ public class HomeViewModel extends ViewModel {
 
     private final Reponsitory reponsitory = new Reponsitory();
 
-    private MutableLiveData<Manga> mutableLiveData = new MutableLiveData<>();
+    private MutableLiveData<List<Manga>> mutableLiveData = new MutableLiveData<>();
 
     public MutableLiveData getManga() {
         return mutableLiveData;
     }
 
-    public void fetchBanner() {
+    public void fetchBannerManga() {
         reponsitory.getBanner().observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
-                .subscribe(new Consumer<Manga>() {
+                .subscribe(new Consumer<List<Manga>>() {
                     @Override
-                    public void accept(Manga manga) throws Exception {
-                        mutableLiveData.setValue(manga);
+                    public void accept(List<Manga> m1) throws Exception {
+                        mutableLiveData.setValue(m1);
+                    }
+                });
+    }
+
+    public void fetchHotManga() {
+        reponsitory.getHotManga().observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribe(new Consumer<List<Manga>>() {
+                    @Override
+                    public void accept(List<Manga> m2) throws Exception {
+                        mutableLiveData.setValue(m2);
                     }
                 });
     }

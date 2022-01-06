@@ -5,7 +5,10 @@ import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
 
 
+import java.util.List;
+
 import io.reactivex.Observable;
+import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
 
@@ -21,6 +24,8 @@ public interface Api {
     Observable<Category> getAllCategory();
 
     @GET("manga/banner")
-    Observable<Manga> getBannerManga();
+    Observable<List<Manga>> getBannerManga();
 
+    @GET("manga/hot")
+    Observable<List<Manga>> getHotManga();
 }

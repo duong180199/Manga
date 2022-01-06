@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.ViewPager;
 
+import com.bumptech.glide.Glide;
 import com.example.mangaapp.R;
 import com.example.mangaapp.model.Manga;
 
@@ -40,10 +41,9 @@ public class BannerAdapter extends RecyclerView.Adapter<BannerAdapter.ViewHolder
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Manga manga = mangaArrayList.get(position);
-
-        holder.imageAvatar.setImageResource(Integer.parseInt(manga.getAvatar()));
-        holder.textName.setText(manga.getName_manga());
-        holder.textDescription.setText(manga.getDescription());
+        Glide.with(context).load(manga.avatar).into(holder.imageAvatar);
+        holder.textName.setText(manga.name_manga);
+        holder.textDescription.setText(manga.description);
     }
 
     @Override

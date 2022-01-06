@@ -1,4 +1,4 @@
-package com.example.mangaapp.viewmodel;
+package com.example.mangaapp.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
