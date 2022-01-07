@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.mangaapp.R;
 import com.example.mangaapp.databinding.ItemHotMangaBinding;
 import com.example.mangaapp.model.Manga;
@@ -42,6 +43,7 @@ public class HotMangaAdapter extends RecyclerView.Adapter<HotMangaAdapter.ViewHo
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         holder.itemHotMangaBinding.textViewHotManga.setText(mangaArrayList.get(position).name_manga);
+        Glide.with(context).load(mangaArrayList.get(position).avatar).into(holder.itemHotMangaBinding.imageHotManga);
     }
 
     @Override

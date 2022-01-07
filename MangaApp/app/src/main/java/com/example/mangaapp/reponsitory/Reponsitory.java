@@ -35,6 +35,11 @@ public class Reponsitory {
         return api.getHotManga();
     }
 
+    public Observable<List<Manga>> getLikeManga(){
+        return api.getLikeManga();
+    }
+
+
     public Observable<Manga> getAllManga(){
         return api.getAllManga();
     }

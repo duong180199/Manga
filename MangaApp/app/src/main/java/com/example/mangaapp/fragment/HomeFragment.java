@@ -17,18 +17,26 @@ import android.view.ViewGroup;
 import com.example.mangaapp.R;
 import com.example.mangaapp.adapter.BannerAdapter;
 import com.example.mangaapp.adapter.HotMangaAdapter;
+import com.example.mangaapp.adapter.LikeMangaAdapter;
 import com.example.mangaapp.databinding.FragmentHomeBinding;
 import com.example.mangaapp.model.Manga;
-import com.example.mangaapp.viewmodel.HomeViewModel;
+import com.example.mangaapp.viewmodel.HomeBannerViewModel;
+import com.example.mangaapp.viewmodel.HomeHotViewModel;
+import com.example.mangaapp.viewmodel.HomeLikeViewModel;
 
 import java.util.ArrayList;
 
 
 public class HomeFragment extends Fragment {
     private FragmentHomeBinding binding;
-    private HomeViewModel homeViewModel;
+
+    private HomeBannerViewModel homeBannerViewModel;
+    private HomeHotViewModel homeHotViewModel;
+    private HomeLikeViewModel homeLikeViewModel;
+
     private BannerAdapter bannerAdapter;
     private HotMangaAdapter hotMangaAdapter;
+    private LikeMangaAdapter likeMangaAdapter;
 
     @Nullable
     @Override
@@ -44,30 +52,41 @@ public class HomeFragment extends Fragment {
         bannerAdapter = new BannerAdapter(getContext());
         hotMangaAdapter = new HotMangaAdapter(getContext());
 
-        homeViewModel = new ViewModelProvider(this).get(HomeViewModel.class);
+        homeBannerViewModel = new ViewModelProvider(this).get(HomeBannerViewModel.class);
+        homeHotViewModel = new ViewModelProvider(this).get(HomeHotViewModel.class);
+        homeLikeViewModel = new ViewModelProvider(this).get(HomeLikeViewModel.class);
+
         getBanner();
         getHotManga();
-
-
-
+        getLikeManga();
     }
 
     public void getBanner(){
-        homeViewModel.getManga().observe((LifecycleOwner) getContext(), o -> {
+        homeBannerViewModel.getManga().observe((LifecycleOwner) getContext(), o -> {
             if (o == null) return;
             bannerAdapter.setMangaArrayList((ArrayList<Manga>) o);
         });
-        homeViewModel.fetchBannerManga();
+        homeBannerViewModel.fetchBannerManga();
         binding.viewpagerBanner.setAdapter(bannerAdapter);
     }
 
     public void getHotManga(){
-        homeViewModel.getManga().observe((LifecycleOwner) getContext(), o -> {
+        homeHotViewModel.getHotManga().observe((LifecycleOwner) getContext(), o -> {
             if (o == null) return;
             hotMangaAdapter.setMangaArrayList((ArrayList<Manga>) o);
         });
-        homeViewModel.fetchHotManga();
+        homeHotViewModel.fetchHotManga();
         binding.recyclerviewMangaHot.setAdapter(hotMangaAdapter);
+    }
+
+    public void getLikeManga(){
+        homeLikeViewModel.getLikeManga().observe((LifecycleOwner) getContext(), o -> {
+            if(o == null) return;
+            likeMangaAdapter.setArrayListLikeManga((ArrayList<Manga>) o);
+            Log.d("TAG123", o.toString());
+        });
+        homeLikeViewModel.fetchLikeManga();
+        binding.recyclerviewLikeManga.setAdapter(likeMangaAdapter);
     }
 
 }
