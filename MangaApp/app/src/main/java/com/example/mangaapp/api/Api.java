@@ -31,4 +31,7 @@ public interface Api {
 
     @GET("manga/like")
     Observable<List<Manga>> getLikeManga();
+
+    @GET("manga/ranking")
+    Observable<List<Manga>> getRankingManga();
 }
