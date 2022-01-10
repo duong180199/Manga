@@ -51,6 +51,7 @@ public class HomeFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         bannerAdapter = new BannerAdapter(getContext());
         hotMangaAdapter = new HotMangaAdapter(getContext());
+        likeMangaAdapter = new LikeMangaAdapter(getContext());
 
         homeBannerViewModel = new ViewModelProvider(this).get(HomeBannerViewModel.class);
         homeHotViewModel = new ViewModelProvider(this).get(HomeHotViewModel.class);

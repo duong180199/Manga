@@ -20,7 +20,7 @@ public class Reponsitory {
 
     public Reponsitory() {
         retrofit = new Retrofit.Builder()
-                .baseUrl("http://10.0.2.2:4567/")
+                .baseUrl("http://192.168.1.9:4567/")
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
@@ -39,6 +39,7 @@ public class Reponsitory {
         return api.getLikeManga();
     }
 
+    public Observable<List<Manga>> getCategory(String name) {return api.getCategoryManga(name);}
 
     public Observable<Manga> getAllManga(){
         return api.getAllManga();

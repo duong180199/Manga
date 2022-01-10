@@ -11,6 +11,7 @@ import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
 import retrofit2.http.Path;
+import retrofit2.http.Query;
 
 public interface Api {
 
@@ -22,6 +23,9 @@ public interface Api {
 
     @GET("manga/category")
     Observable<Category> getAllCategory();
+
+    @GET("manga/category/{name}")
+    Observable<List<Manga>> getCategoryManga(@Path("name") String name);
 
     @GET("manga/banner")
     Observable<List<Manga>> getBannerManga();
