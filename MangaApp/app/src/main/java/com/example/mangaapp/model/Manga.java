@@ -14,9 +14,11 @@ public class Manga {
     @SerializedName("url")
     public String url_manga;
     @SerializedName("category")
-    public List<String> id_category;
+    public List<String> category;
     @SerializedName("description")
     public String description;
+    @SerializedName("view")
+    public String views;
 
     @Override
     public String toString() {
@@ -25,8 +27,9 @@ public class Manga {
                 ", name_manga='" + name_manga + '\'' +
                 ", avatar='" + avatar + '\'' +
                 ", url_manga='" + url_manga + '\'' +
-                ", id_category=" + id_category +
+                ", category=" + category +
                 ", description='" + description + '\'' +
+                ", views='" + views + '\'' +
                 '}';
     }
 }

@@ -6,16 +6,26 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ViewModelProvider;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mangaapp.R;
+import com.example.mangaapp.adapter.RankingDayAdapter;
 import com.example.mangaapp.databinding.FragmentRankingBinding;
+import com.example.mangaapp.model.Manga;
+import com.example.mangaapp.viewmodel.RankingDayViewModel;
+
+import java.util.ArrayList;
 
 public class RankingFragment extends Fragment {
     private FragmentRankingBinding binding;
+    private RankingDayViewModel rankingDayViewModel;
+    private RankingDayAdapter rankingDayAdapter;
 
     @Nullable
     @Override
@@ -23,5 +33,25 @@ public class RankingFragment extends Fragment {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_ranking,container,false);
         binding.setLifecycleOwner(getViewLifecycleOwner());
         return binding.getRoot();
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        rankingDayAdapter = new RankingDayAdapter(getContext());
+
+        rankingDayViewModel = new ViewModelProvider(this).get(RankingDayViewModel.class);
+
+        getData();
+    }
+
+    private void getData() {
+        rankingDayViewModel.getRankingDay().observe((LifecycleOwner) getContext(), o -> {
+            if (o == null ) return;
+            rankingDayAdapter.setArrayList((ArrayList<Manga>) o);
+            Log.d("AAA", o.toString());
+        });
+        rankingDayViewModel.fetchRankingDay();
+        binding.recyclerviewRanking.setAdapter(rankingDayAdapter);
     }
 }

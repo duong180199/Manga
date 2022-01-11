@@ -22,7 +22,7 @@ public interface Api {
     Observable<Chapter> getAllChapterManga(@Path("id_manga") int id);
 
     @GET("manga/category")
-    Observable<Category> getAllCategory();
+    Observable<List<Category>> getAllCategory();
 
     @GET("manga/category/{name}")
     Observable<List<Manga>> getCategoryManga(@Path("name") String name);
@@ -36,6 +36,6 @@ public interface Api {
     @GET("manga/like")
     Observable<List<Manga>> getLikeManga();
 
-    @GET("manga/ranking")
-    Observable<List<Manga>> getRankingManga();
+    @GET("manga/ranking/day")
+    Observable<List<Manga>> getRankingDayManga();
 }

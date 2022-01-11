@@ -41,6 +41,8 @@ public class Reponsitory {
 
     public Observable<List<Manga>> getCategory(String name) {return api.getCategoryManga(name);}
 
+    public Observable<List<Manga>> getRankingDay(){return api.getRankingDayManga();}
+
     public Observable<Manga> getAllManga(){
         return api.getAllManga();
     }
@@ -49,7 +51,7 @@ public class Reponsitory {
         return api.getAllChapterManga(id);
     }
 
-    public Observable<Category> getAllCategory(){
+    public Observable<List<Category>> getAllCategory(){
         return api.getAllCategory();
     }
 
