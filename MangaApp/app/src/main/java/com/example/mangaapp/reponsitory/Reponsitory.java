@@ -43,17 +43,18 @@ public class Reponsitory {
 
     public Observable<List<Manga>> getRankingDay(){return api.getRankingDayManga();}
 
-    public Observable<Manga> getAllManga(){
-        return api.getAllManga();
+    public Observable<Manga> getManga(int id){
+        return api.getManga(id);
     }
 
-    public Observable<Chapter> getAllChapter(int id){
-        return api.getAllChapterManga(id);
+    public Observable<List<Chapter>> getMangaChapter(int id){
+        return api.getMangaChapter(id);
     }
 
     public Observable<List<Category>> getAllCategory(){
         return api.getAllCategory();
     }
+
 
 
 }

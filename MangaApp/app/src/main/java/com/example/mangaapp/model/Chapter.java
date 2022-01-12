@@ -6,11 +6,11 @@ import java.util.ArrayList;
 
 public class Chapter {
     @SerializedName("idchapter")
-    private int idchapter;
+    public int idchapter;
     @SerializedName("idtruyen")
-    private int idtruyen;
+    public int idtruyen;
     @SerializedName("name")
-    private String name;
+    public String name;
     @SerializedName("link")
-    private ArrayList<String> link;
+    public ArrayList<String> link;
 }

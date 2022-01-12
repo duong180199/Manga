@@ -18,8 +18,11 @@ public interface Api {
     @GET("manga/manga")
     Observable<Manga> getAllManga();
 
-    @GET("manga/chapter")
-    Observable<Chapter> getAllChapterManga(@Path("id_manga") int id);
+    @GET("manga/manga/{id_manga}")
+    Observable<Manga> getManga(@Path("id_manga") int id);
+
+    @GET("manga/chapter/{id_manga}")
+    Observable<List<Chapter>> getMangaChapter(@Path("id_manga") int id);
 
     @GET("manga/category")
     Observable<List<Category>> getAllCategory();
