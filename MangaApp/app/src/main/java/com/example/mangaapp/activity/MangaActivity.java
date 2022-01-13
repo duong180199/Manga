@@ -26,6 +26,7 @@ public class MangaActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_manga);
+
         chapterAdapter = new ChapterAdapter(this);
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_manga);

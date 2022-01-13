@@ -1,5 +1,6 @@
 package com.example.mangaapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,7 +15,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
+import com.example.mangaapp.activity.MangaActivity;
 import com.example.mangaapp.adapter.BannerAdapter;
 import com.example.mangaapp.adapter.HotMangaAdapter;
 import com.example.mangaapp.adapter.LikeMangaAdapter;
@@ -27,7 +30,7 @@ import com.example.mangaapp.viewmodel.HomeLikeViewModel;
 import java.util.ArrayList;
 
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements OnClickListener {
     private FragmentHomeBinding binding;
 
     private HomeBannerViewModel homeBannerViewModel;
@@ -90,4 +93,10 @@ public class HomeFragment extends Fragment {
         binding.recyclerviewLikeManga.setAdapter(likeMangaAdapter);
     }
 
+    @Override
+    public void onClick(Manga o) {
+        Intent intent = new Intent(getContext(), MangaActivity.class);
+        intent.putExtra("id_manga", o.id_manga);
+        startActivity(intent);
+    }
 }

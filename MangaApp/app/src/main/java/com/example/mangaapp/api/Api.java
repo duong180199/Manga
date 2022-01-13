@@ -15,9 +15,6 @@ import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("manga/manga")
-    Observable<Manga> getAllManga();
-
     @GET("manga/manga/{id_manga}")
     Observable<Manga> getManga(@Path("id_manga") int id);
 
@@ -41,4 +38,7 @@ public interface Api {
 
     @GET("manga/ranking/day")
     Observable<List<Manga>> getRankingDayManga();
+
+    @GET("manga/chapter/image/{idchapter}")
+    Observable<List<String>> getImageChapter(@Path("idchapter") int idchapter);
 }
