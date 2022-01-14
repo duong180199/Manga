@@ -2,7 +2,9 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="manga"
+            type="com.example.mangaapp.model.Manga" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -15,7 +17,6 @@
             android:id="@+id/text_view_category_home"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Thể loại"
             android:padding="10dp"
             android:textStyle="bold"
             android:textSize="20sp"
@@ -27,7 +28,7 @@
             android:layout_width="150dp"
             android:layout_height="200dp"
             android:layout_marginTop="10dp"
-            android:src="@drawable/ic_baseline_category_24"
+            imageURL="@{manga.avatar}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_category_home" />
 
@@ -35,9 +36,9 @@
             android:id="@+id/text_view_title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="10dp"
-            android:text="Nhà lao chi vương"
+            android:layout_marginTop="15dp"
             android:textStyle="bold"
+            android:text="@{manga.name_manga}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_avatar"
             app:layout_constraintTop_toBottomOf="@id/text_view_category_home" />
@@ -49,7 +50,7 @@
             android:layout_marginTop="10dp"
             android:ellipsize="end"
             android:maxLines="5"
-            android:text="Noi dung"
+            android:text="@{manga.description}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/image_avatar"
             app:layout_constraintTop_toBottomOf="@id/text_view_title" />

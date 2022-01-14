@@ -43,12 +43,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Log.d("bbbb", images.get(position));
-
         Glide.with(context).load(images.get(position))
                 .fitCenter()
                 .into(holder.itemImageBinding.imageChapter);
-//        Picasso.get().load(images.get(position)).into(holder.itemImageBinding.imageChapter);
     }
 
     @Override

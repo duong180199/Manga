@@ -1,16 +1,14 @@
 package com.example.mangaapp.adapter;
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
 import com.example.mangaapp.databinding.ItemHotMangaBinding;
 import com.example.mangaapp.model.Manga;
@@ -21,9 +19,14 @@ import java.util.ArrayList;
 public class HotMangaAdapter extends RecyclerView.Adapter<HotMangaAdapter.ViewHolder>{
     private ArrayList<Manga> mangaArrayList;
     private Context context;
+    private OnClickListener onClickListener;
 
     public HotMangaAdapter(Context context) {
         this.context = context;
+    }
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
     }
 
     public void setMangaArrayList(ArrayList<Manga> mangaArrayList) {
@@ -42,18 +45,24 @@ public class HotMangaAdapter extends RecyclerView.Adapter<HotMangaAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemHotMangaBinding.textViewHotManga.setText(mangaArrayList.get(position).name_manga);
-        Glide.with(context).load(mangaArrayList.get(position).avatar).into(holder.itemHotMangaBinding.imageHotManga);
+        holder.setBinding(mangaArrayList.get(position));
     }
 
     @Override
     public int getItemCount() {
-        if (mangaArrayList == null) return 0;
-        return mangaArrayList.size();
+        return mangaArrayList != null  ? mangaArrayList.size() : 0;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
         ItemHotMangaBinding itemHotMangaBinding;
+        public void setBinding(Manga manga){
+            itemHotMangaBinding.setManga(manga);
+            itemHotMangaBinding.executePendingBindings();
+            itemHotMangaBinding.getRoot().setOnClickListener(v -> {
+                if (onClickListener == null) return;
+                onClickListener.onClickManga(manga);
+            });
+        }
         public ViewHolder(@NonNull ItemHotMangaBinding ItemHotMangaBinding) {
             super(ItemHotMangaBinding.getRoot());
             this.itemHotMangaBinding = ItemHotMangaBinding;

@@ -14,7 +14,7 @@
             android:layout_width="150dp"
             android:layout_height="150dp"
             android:scaleType="fitXY"
-            android:imageURL="@{manga.avatar}"
+            imageURL="@{manga.avatar}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
         <TextView
@@ -22,9 +22,9 @@
             android:layout_width="150dp"
             android:layout_height="30dp"
             app:layout_constraintStart_toStartOf="parent"
-            android:text="@{manga.name_manga}"
             android:ellipsize="end"
             android:lines="2"
+            android:text="@{manga.name_manga}"
             app:layout_constraintTop_toBottomOf="@id/image_hot_manga"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+        <variable
+            name="manga"
+            type="com.example.mangaapp.model.Manga" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -10,13 +16,14 @@
                 android:id="@+id/image_view_ranking"
                 android:layout_width="150dp"
                 android:layout_height="150dp"
+                imageURL="@{manga.avatar}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"/>
             <TextView
                 android:id="@+id/text_view_name_ranking_manga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Name"
+                android:text="@{manga.name_manga}"
                 android:textSize="20sp"
                 android:textColor="@color/orange"
                 android:layout_margin="10dp"
@@ -28,7 +35,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="Category"
+                android:text="@{manga.category.toString()}"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/image_view_ranking"
@@ -39,7 +46,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_margin="10dp"
-                android:text="View"
+                android:text="@{manga.views}"
                 android:textSize="18sp"
                 android:textColor="@color/black"
                 app:layout_constraintStart_toEndOf="@id/image_view_ranking"

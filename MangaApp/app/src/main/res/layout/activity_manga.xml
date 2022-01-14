@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <data></data>
+    <data>
+        <variable
+            name="manga"
+            type="com.example.mangaapp.model.Manga" />
+    </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -30,7 +34,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-            android:text="name manga"
+            android:text="@{manga.name_manga}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/toolbar" />
@@ -41,6 +45,7 @@
             android:layout_height="170dp"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="10dp"
+            imageURL="@{manga.avatar}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_name" />
 
@@ -58,7 +63,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="the loai"
+            android:text="@{manga.category.toString()}"
             app:layout_constraintStart_toEndOf="@id/image_manga_avatar"
             app:layout_constraintTop_toBottomOf="@id/text_view_name_author" />
 
@@ -67,7 +72,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="15dp"
-            android:text="view:"
+            android:drawableLeft="@drawable/ic_baseline_remove_red_eye_24"
+            android:text="@{manga.views}"
             app:layout_constraintStart_toEndOf="@id/image_manga_avatar"
             app:layout_constraintTop_toBottomOf="@id/text_view_name_category" />
 
@@ -87,7 +93,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border_rim_text"
             android:layout_marginTop="15dp"
-            android:text="Noi Dung"
+            android:text="@string/Description"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/image_manga_avatar" />
@@ -98,7 +104,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
             android:layout_marginTop="15dp"
-            android:text="Des"
+            android:text="@{manga.description}"
             android:textSize="15sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_title_des" />
@@ -109,7 +115,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/border_rim_text"
             android:layout_marginTop="15dp"
-            android:text="Danh Sach Chuong"
+            android:text="@string/ListChapter"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/text_view_description" />

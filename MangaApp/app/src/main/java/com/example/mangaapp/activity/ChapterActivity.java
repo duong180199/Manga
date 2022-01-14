@@ -5,8 +5,10 @@ import androidx.databinding.DataBindingUtil;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.mangaapp.R;
 import com.example.mangaapp.adapter.ImageAdapter;
@@ -34,7 +36,9 @@ public class ChapterActivity extends AppCompatActivity {
 
         observeLiveData();
 
-        getData(46988);
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("id_chapter");
+        getData(Integer.parseInt(id));
     }
 
     private void observeLiveData() {

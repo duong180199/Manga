@@ -22,6 +22,8 @@ import com.example.mangaapp.adapter.BannerAdapter;
 import com.example.mangaapp.adapter.HotMangaAdapter;
 import com.example.mangaapp.adapter.LikeMangaAdapter;
 import com.example.mangaapp.databinding.FragmentHomeBinding;
+import com.example.mangaapp.model.Category;
+import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
 import com.example.mangaapp.viewmodel.HomeBannerViewModel;
 import com.example.mangaapp.viewmodel.HomeHotViewModel;
@@ -56,6 +58,9 @@ public class HomeFragment extends Fragment implements OnClickListener {
         hotMangaAdapter = new HotMangaAdapter(getContext());
         likeMangaAdapter = new LikeMangaAdapter(getContext());
 
+        hotMangaAdapter.setOnClickListener(this);
+        likeMangaAdapter.setOnClickListener(this);
+
         homeBannerViewModel = new ViewModelProvider(this).get(HomeBannerViewModel.class);
         homeHotViewModel = new ViewModelProvider(this).get(HomeHotViewModel.class);
         homeLikeViewModel = new ViewModelProvider(this).get(HomeLikeViewModel.class);
@@ -87,16 +92,25 @@ public class HomeFragment extends Fragment implements OnClickListener {
         homeLikeViewModel.getLikeManga().observe((LifecycleOwner) getContext(), o -> {
             if(o == null) return;
             likeMangaAdapter.setArrayListLikeManga((ArrayList<Manga>) o);
-            Log.d("TAG123", o.toString());
         });
         homeLikeViewModel.fetchLikeManga();
         binding.recyclerviewLikeManga.setAdapter(likeMangaAdapter);
     }
 
     @Override
-    public void onClick(Manga o) {
+    public void onClickManga(Manga manga) {
         Intent intent = new Intent(getContext(), MangaActivity.class);
-        intent.putExtra("id_manga", o.id_manga);
+        intent.putExtra("id_manga", manga.id_manga);
         startActivity(intent);
+    }
+
+    @Override
+    public void onClickChapter(Chapter chapter) {
+
+    }
+
+    @Override
+    public void onClickCategory(Category category) {
+
     }
 }

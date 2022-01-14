@@ -1,5 +1,6 @@
 package com.example.mangaapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,19 +15,23 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
+import com.example.mangaapp.activity.MangaActivity;
 import com.example.mangaapp.adapter.CategoryAdapter;
 import com.example.mangaapp.adapter.CategoryMangaAdapter;
 import com.example.mangaapp.adapter.RankingDayAdapter;
 import com.example.mangaapp.databinding.FragmentCategoryBinding;
 import com.example.mangaapp.model.Category;
+import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
 import com.example.mangaapp.viewmodel.CategoryViewModel;
 
 import java.util.ArrayList;
 
+//xu ly lai ham nay
 
-public class CategoryFragment extends Fragment {
+public class CategoryFragment extends Fragment implements OnClickListener {
     private FragmentCategoryBinding binding;
     private CategoryAdapter categoryAdapter;
     private CategoryViewModel categoryViewModel;
@@ -43,6 +48,8 @@ public class CategoryFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         categoryAdapter = new CategoryAdapter(getContext());
+        categoryAdapter.setOnClickListener(this);
+
         rankingDayAdapter = new RankingDayAdapter(getContext());
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
@@ -55,7 +62,6 @@ public class CategoryFragment extends Fragment {
     private void getMangaCategory() {
         categoryViewModel.fetchMangaCategory("Action").observe((LifecycleOwner) getContext(), mangas -> {
             rankingDayAdapter.setArrayList((ArrayList<Manga>) mangas);
-//            Log.d("AAA", mangas.toString());
         });
         binding.recyclerCategoryManga.setAdapter(rankingDayAdapter);
     }
@@ -65,5 +71,22 @@ public class CategoryFragment extends Fragment {
             categoryAdapter.setArrayList((ArrayList<Category>) categories);
         } );
         binding.recyclerCategory.setAdapter(categoryAdapter);
+    }
+
+    @Override
+    public void onClickManga(Manga manga) {
+        Intent intent = new Intent(getContext(), MangaActivity.class);
+        intent.putExtra("id_manga",manga.id_manga);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClickChapter(Chapter chapter) {
+
+    }
+
+    @Override
+    public void onClickCategory(Category category) {
+
     }
 }

@@ -1,5 +1,6 @@
 package com.example.mangaapp.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,16 +15,20 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
+import com.example.mangaapp.activity.MangaActivity;
 import com.example.mangaapp.adapter.CategoryMangaAdapter;
 import com.example.mangaapp.databinding.FragmentCategoryHomeBinding;
+import com.example.mangaapp.model.Category;
+import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
 import com.example.mangaapp.viewmodel.HomeCategoryViewModel;
 
 import java.util.ArrayList;
 
 
-public class CategoryHomeFragment extends Fragment {
+public class CategoryHomeFragment extends Fragment implements OnClickListener  {
     private FragmentCategoryHomeBinding binding;
     private HomeCategoryViewModel homeCategoryViewModel;
     private CategoryMangaAdapter categoryMangaAdapter;
@@ -40,11 +45,11 @@ public class CategoryHomeFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-
-
         categoryMangaAdapter = new CategoryMangaAdapter(getContext());
+        categoryMangaAdapter.setOnClickListener(this);
 
         homeCategoryViewModel = new ViewModelProvider(this).get(HomeCategoryViewModel.class);
+
 
         getData();
     }
@@ -55,13 +60,33 @@ public class CategoryHomeFragment extends Fragment {
             ArrayList<Manga> arrayList ;
             arrayList = (ArrayList<Manga>) o;
             binding.textViewCategoryHome.setText("Shoujo");
-            binding.textViewTitle.setText(arrayList.get(0).name_manga);
-            binding.textViewAvatarDescriiption.setText(arrayList.get(0).description);
-            Glide.with(getContext()).load(arrayList.get(0).avatar).into(binding.imageAvatar);
+            binding.setManga(arrayList.get(0));
+            binding.imageAvatar.setOnClickListener(v -> {
+                Intent intent = new Intent(getContext(), MangaActivity.class);
+                intent.putExtra("id_manga",arrayList.get(0).id_manga);
+                startActivity(intent);
+            });
             arrayList.remove(0);
             categoryMangaAdapter.setArrayList(arrayList);
         });
         homeCategoryViewModel.fetchHomeCategory("Shoujo");
         binding.recyclerCategoryHomeManga.setAdapter(categoryMangaAdapter);
+    }
+
+    @Override
+    public void onClickManga(Manga manga) {
+        Intent intent = new Intent(getContext(), MangaActivity.class);
+        intent.putExtra("id_manga",manga.id_manga);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClickChapter(Chapter chapter) {
+
+    }
+
+    @Override
+    public void onClickCategory(Category category) {
+
     }
 }

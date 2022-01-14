@@ -10,6 +10,7 @@ import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
 import com.example.mangaapp.databinding.ItemRankingMangaBinding;
 import com.example.mangaapp.model.Manga;
@@ -20,6 +21,11 @@ public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.Vi
 
     private Context context;
     private ArrayList<Manga> arrayList;
+    private OnClickListener onClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     public RankingDayAdapter(Context context) {
         this.context = context;
@@ -41,21 +47,24 @@ public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.Vi
 
     @Override
     public int getItemCount() {
-        if(arrayList == null) return 0;
-        return arrayList.size();
+        return arrayList == null ? 0 :arrayList.size();
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.itemRankingMangaBinding.textViewNameRankingManga.setText(arrayList.get(position).name_manga);
-        holder.itemRankingMangaBinding.textViewManga.setText(arrayList.get(position).views);
-//        Log.d("BBB", arrayList.get(position).views);
-        holder.itemRankingMangaBinding.textViewCategoryManga.setText(arrayList.get(position).category.toString());
-        Glide.with(context).load(arrayList.get(position).avatar).into(holder.itemRankingMangaBinding.imageViewRanking);
+        holder.setBinding(arrayList.get(position));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemRankingMangaBinding itemRankingMangaBinding;
+        public void setBinding(Manga manga){
+            itemRankingMangaBinding.setManga(manga);
+            itemRankingMangaBinding.executePendingBindings();
+            itemRankingMangaBinding.getRoot().setOnClickListener(v -> {
+                onClickListener.onClickManga(manga);
+            });
+        }
+
         public ViewHolder(@NonNull ItemRankingMangaBinding itemRankingMangaBinding) {
             super(itemRankingMangaBinding.getRoot());
             this.itemRankingMangaBinding = itemRankingMangaBinding;

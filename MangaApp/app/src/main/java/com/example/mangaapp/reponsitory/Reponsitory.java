@@ -57,7 +57,4 @@ public class Reponsitory {
     public Observable<List<String>> getImageChapter(int idchapter){
         return api.getImageChapter(idchapter);
     }
-
-
-
 }

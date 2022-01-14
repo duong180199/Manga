@@ -2,14 +2,13 @@ package com.example.mangaapp.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
+import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
 import com.example.mangaapp.databinding.ItemCategoryMangaBinding;
 import com.example.mangaapp.model.Manga;
@@ -19,6 +18,11 @@ import java.util.ArrayList;
 public class CategoryMangaAdapter extends RecyclerView.Adapter<CategoryMangaAdapter.ViewHolder> {
     private ArrayList<Manga> arrayList;
     private Context context;
+    private OnClickListener onClickListener;
+
+    public void setOnClickListener(OnClickListener onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     public CategoryMangaAdapter(Context context) {
         this.context = context;
@@ -39,8 +43,7 @@ public class CategoryMangaAdapter extends RecyclerView.Adapter<CategoryMangaAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Glide.with(context).load(arrayList.get(position).avatar).into(holder.itemCategoryMangaBinding.imageCategoryManga);
-        holder.itemCategoryMangaBinding.textViewCategoryManga.setText(arrayList.get(position).name_manga);
+        holder.setBinding(arrayList.get(position));
     }
 
     @Override
@@ -51,6 +54,13 @@ public class CategoryMangaAdapter extends RecyclerView.Adapter<CategoryMangaAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         ItemCategoryMangaBinding itemCategoryMangaBinding;
+        public void setBinding(Manga manga){
+            itemCategoryMangaBinding.setManga(manga);
+            itemCategoryMangaBinding.executePendingBindings();
+            itemCategoryMangaBinding.getRoot().setOnClickListener(v -> {
+                onClickListener.onClickManga(manga);
+            });
+        }
         public ViewHolder(@NonNull ItemCategoryMangaBinding itemCategoryMangaBinding) {
             super(itemCategoryMangaBinding.getRoot());
             this.itemCategoryMangaBinding = itemCategoryMangaBinding;
