@@ -27,7 +27,7 @@ import com.example.mangaapp.viewmodel.HomeCategoryViewModel;
 
 import java.util.ArrayList;
 
-
+// categoryfragment+ categoryHome + man chapter
 public class CategoryHomeFragment extends Fragment implements OnClickListener  {
     private FragmentCategoryHomeBinding binding;
     private HomeCategoryViewModel homeCategoryViewModel;
@@ -59,6 +59,7 @@ public class CategoryHomeFragment extends Fragment implements OnClickListener  {
             if (o == null) return;
             ArrayList<Manga> arrayList ;
             arrayList = (ArrayList<Manga>) o;
+//            Manga manga = arrayList.get(0);
             binding.textViewCategoryHome.setText("Shoujo");
             binding.setManga(arrayList.get(0));
             binding.imageAvatar.setOnClickListener(v -> {

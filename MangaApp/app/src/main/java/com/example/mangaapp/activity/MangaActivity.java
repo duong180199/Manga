@@ -38,6 +38,8 @@ public class MangaActivity extends AppCompatActivity implements OnClickListener 
 
         mangaViewModel = new ViewModelProvider(this).get(MangaViewModel.class);
 
+        binding.recyclerChapter.setAdapter(chapterAdapter);
+
         setSupportActionBar(binding.toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -56,7 +58,6 @@ public class MangaActivity extends AppCompatActivity implements OnClickListener 
         mangaViewModel.fetchMangaChapter(id).observe(this,chapters -> {
             if(chapters == null) return;
             chapterAdapter.setArrayList((ArrayList<Chapter>) chapters);
-            binding.recyclerChapter.setAdapter(chapterAdapter);
         });
     }
 
@@ -72,12 +73,12 @@ public class MangaActivity extends AppCompatActivity implements OnClickListener 
     @Override
     public void onClickChapter(Chapter chapter) {
         Intent intent = new Intent(this,ChapterActivity.class);
-        intent.putExtra("id_chapter",chapter.idchapter);
+        intent.putExtra("id_chapter",String.valueOf(chapter.idchapter));//cai nay == null
         startActivity(intent);
     }
 
     @Override
     public void onClickCategory(Category category) {
 
-    }
+    }//sa
 }

@@ -5,7 +5,9 @@ import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.FragmentStatePagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 
 import com.example.mangaapp.R;
 import com.example.mangaapp.adapter.ViewPagerAdapter;
@@ -67,10 +69,17 @@ public class MainActivity extends AppCompatActivity {
                     binding.viewPagerHome.setCurrentItem(2);
                     break;
                 case R.id.menu_user:
+                    Intent intent = new Intent(this,LoginActivity.class);
+                    startActivity(intent);
                     binding.viewPagerHome.setCurrentItem(3);
                     break;
             }
             return true;
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 }

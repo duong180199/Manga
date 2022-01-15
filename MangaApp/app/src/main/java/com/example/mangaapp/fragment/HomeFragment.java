@@ -12,12 +12,15 @@ import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
 import com.example.mangaapp.activity.MangaActivity;
+import com.example.mangaapp.activity.SearchActivity;
 import com.example.mangaapp.adapter.BannerAdapter;
 import com.example.mangaapp.adapter.HotMangaAdapter;
 import com.example.mangaapp.adapter.LikeMangaAdapter;
@@ -65,6 +68,11 @@ public class HomeFragment extends Fragment implements OnClickListener {
         homeHotViewModel = new ViewModelProvider(this).get(HomeHotViewModel.class);
         homeLikeViewModel = new ViewModelProvider(this).get(HomeLikeViewModel.class);
 
+        binding.search.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            startActivity(intent);
+        });
+
         getBanner();
         getHotManga();
         getLikeManga();
@@ -96,6 +104,7 @@ public class HomeFragment extends Fragment implements OnClickListener {
         homeLikeViewModel.fetchLikeManga();
         binding.recyclerviewLikeManga.setAdapter(likeMangaAdapter);
     }
+
 
     @Override
     public void onClickManga(Manga manga) {

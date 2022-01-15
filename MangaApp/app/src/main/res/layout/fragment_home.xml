@@ -10,6 +10,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="10dp"
+            android:background="#FFEB3B"
             tools:context=".fragment.HomeFragment">
 
             <ImageView
@@ -23,6 +24,7 @@
 
             <androidx.viewpager2.widget.ViewPager2
                 android:id="@+id/viewpager_banner"
+                android:background="#8BC34A"
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:layout_marginTop="10dp"
@@ -46,6 +48,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="#8BC34A"
                 app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -67,6 +70,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
+                android:background="#8BC34A"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +83,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
+                android:background="#8BC34A"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintTop_toBottomOf="@id/recyclerview_like_manga"
                 app:layout_constraintEnd_toEndOf="parent"

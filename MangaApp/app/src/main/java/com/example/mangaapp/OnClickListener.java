@@ -6,6 +6,6 @@ import com.example.mangaapp.model.Manga;
 
 public interface OnClickListener {
     void onClickManga(Manga manga);
-    void onClickChapter(Chapter chapter);
+    void  onClickChapter(Chapter chapter);
     void onClickCategory(Category category);
 }

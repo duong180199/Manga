@@ -16,6 +16,7 @@ import com.example.mangaapp.databinding.ItemRankingMangaBinding;
 import com.example.mangaapp.model.Manga;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.ViewHolder> {
 
@@ -47,7 +48,7 @@ public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return arrayList == null ? 0 :arrayList.size();
+        return arrayList != null ? arrayList.size() : 0;
     }
 
     @Override

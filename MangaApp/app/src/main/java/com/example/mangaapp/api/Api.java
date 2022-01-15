@@ -10,21 +10,22 @@ import java.util.List;
 import io.reactivex.Observable;
 import retrofit2.Call;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface Api {
 
-    @GET("manga/manga/{id_manga}")
+    @POST("manga/manga/{id_manga}")
     Observable<Manga> getManga(@Path("id_manga") int id);
 
-    @GET("manga/chapter/{id_manga}")
+    @POST("manga/chapter/{id_manga}")
     Observable<List<Chapter>> getMangaChapter(@Path("id_manga") int id);
 
     @GET("manga/category")
     Observable<List<Category>> getAllCategory();
 
-    @GET("manga/category/{name}")
+    @POST("manga/category/{name}")
     Observable<List<Manga>> getCategoryManga(@Path("name") String name);
 
     @GET("manga/banner")
@@ -39,6 +40,9 @@ public interface Api {
     @GET("manga/ranking/day")
     Observable<List<Manga>> getRankingDayManga();
 
-    @GET("manga/chapter/image/{idchapter}")
+    @POST("manga/chapter/image/{idchapter}")
     Observable<List<String>> getImageChapter(@Path("idchapter") int idchapter);
+
+    @POST("manga/search/{name}")
+    Observable<List<Manga>> getSearch(@Path("name") String name);
 }

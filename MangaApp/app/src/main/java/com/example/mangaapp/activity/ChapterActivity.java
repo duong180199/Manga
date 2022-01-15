@@ -31,11 +31,13 @@ public class ChapterActivity extends AppCompatActivity {
         chapterViewModel = new ViewModelProvider(this).get(ChapterViewModel.class);
 
         binding = DataBindingUtil.setContentView(this,R.layout.activity_chapter);
-
         binding.recyclerImageChapter.setAdapter(imageAdapter);
 
-        observeLiveData();
+        setSupportActionBar(binding.toolbarChapter);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        observeLiveData();
         Intent intent = getIntent();
         String id = intent.getStringExtra("id_chapter");
         getData(Integer.parseInt(id));
@@ -50,5 +52,11 @@ public class ChapterActivity extends AppCompatActivity {
 
     private void getData(int id) {
         chapterViewModel.fetchImages(id);
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
     }
 }

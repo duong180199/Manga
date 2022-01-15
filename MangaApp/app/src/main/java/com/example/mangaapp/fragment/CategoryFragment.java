@@ -18,6 +18,7 @@ import android.view.ViewGroup;
 import com.example.mangaapp.OnClickListener;
 import com.example.mangaapp.R;
 import com.example.mangaapp.activity.MangaActivity;
+import com.example.mangaapp.activity.SearchActivity;
 import com.example.mangaapp.adapter.CategoryAdapter;
 import com.example.mangaapp.adapter.CategoryMangaAdapter;
 import com.example.mangaapp.adapter.RankingDayAdapter;
@@ -29,7 +30,6 @@ import com.example.mangaapp.viewmodel.CategoryViewModel;
 
 import java.util.ArrayList;
 
-//xu ly lai ham nay
 
 public class CategoryFragment extends Fragment implements OnClickListener {
     private FragmentCategoryBinding binding;
@@ -51,9 +51,18 @@ public class CategoryFragment extends Fragment implements OnClickListener {
         categoryAdapter.setOnClickListener(this);
 
         rankingDayAdapter = new RankingDayAdapter(getContext());
+        rankingDayAdapter.setOnClickListener(this);
 
         categoryViewModel = new ViewModelProvider(this).get(CategoryViewModel.class);
 
+        binding.recyclerCategoryManga.setAdapter(rankingDayAdapter);
+
+        binding.recyclerCategory.setAdapter(categoryAdapter);
+
+        binding.search.setOnClickListener(v -> {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            startActivity(intent);
+        });
         getDataCategory();
         getMangaCategory();
 
@@ -61,22 +70,23 @@ public class CategoryFragment extends Fragment implements OnClickListener {
 
     private void getMangaCategory() {
         categoryViewModel.fetchMangaCategory("Action").observe((LifecycleOwner) getContext(), mangas -> {
+            if(mangas == null) return;
             rankingDayAdapter.setArrayList((ArrayList<Manga>) mangas);
         });
-        binding.recyclerCategoryManga.setAdapter(rankingDayAdapter);
     }
 
     private void getDataCategory() {
         categoryViewModel.fetchCategory().observe((LifecycleOwner) getContext(), categories ->{
+            if(categories == null) return;
             categoryAdapter.setArrayList((ArrayList<Category>) categories);
         } );
-        binding.recyclerCategory.setAdapter(categoryAdapter);
+
     }
 
     @Override
     public void onClickManga(Manga manga) {
         Intent intent = new Intent(getContext(), MangaActivity.class);
-        intent.putExtra("id_manga",manga.id_manga);
+        intent.putExtra("id_manga",manga.id_manga.toString());
         startActivity(intent);
     }
 
