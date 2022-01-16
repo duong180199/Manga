@@ -68,6 +68,9 @@ public class HomeFragment extends Fragment implements OnClickListener {
         homeHotViewModel = new ViewModelProvider(this).get(HomeHotViewModel.class);
         homeLikeViewModel = new ViewModelProvider(this).get(HomeLikeViewModel.class);
 
+        binding.recyclerviewLikeManga.setAdapter(likeMangaAdapter);
+        binding.recyclerviewMangaHot.setAdapter(hotMangaAdapter);
+        binding.viewpagerBanner.setAdapter(bannerAdapter);
         binding.search.setOnClickListener(v -> {
             Intent intent = new Intent(getContext(), SearchActivity.class);
             startActivity(intent);
@@ -78,31 +81,31 @@ public class HomeFragment extends Fragment implements OnClickListener {
         getLikeManga();
     }
 
-    public void getBanner(){
+    public void getBanner() {
         homeBannerViewModel.getManga().observe((LifecycleOwner) getContext(), o -> {
             if (o == null) return;
             bannerAdapter.setMangaArrayList((ArrayList<Manga>) o);
         });
         homeBannerViewModel.fetchBannerManga();
-        binding.viewpagerBanner.setAdapter(bannerAdapter);
+
     }
 
-    public void getHotManga(){
+    public void getHotManga() {
         homeHotViewModel.getHotManga().observe((LifecycleOwner) getContext(), o -> {
             if (o == null) return;
             hotMangaAdapter.setMangaArrayList((ArrayList<Manga>) o);
         });
         homeHotViewModel.fetchHotManga();
-        binding.recyclerviewMangaHot.setAdapter(hotMangaAdapter);
+
     }
 
-    public void getLikeManga(){
+    public void getLikeManga() {
         homeLikeViewModel.getLikeManga().observe((LifecycleOwner) getContext(), o -> {
-            if(o == null) return;
+            if (o == null) return;
             likeMangaAdapter.setArrayListLikeManga((ArrayList<Manga>) o);
         });
         homeLikeViewModel.fetchLikeManga();
-        binding.recyclerviewLikeManga.setAdapter(likeMangaAdapter);
+
     }
 
 

@@ -3,6 +3,7 @@ package com.example.mangaapp.api;
 import com.example.mangaapp.model.Category;
 import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
+import com.example.mangaapp.model.User;
 
 
 import java.util.List;
@@ -45,4 +46,7 @@ public interface Api {
 
     @POST("manga/search/{name}")
     Observable<List<Manga>> getSearch(@Path("name") String name);
+
+    @POST("user/login")
+    Observable<User> getUser(@Query("username") String username,@Query("password") String password);
 }

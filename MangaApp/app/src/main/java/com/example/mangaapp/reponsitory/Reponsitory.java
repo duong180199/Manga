@@ -6,6 +6,7 @@ import com.example.mangaapp.api.Api;
 import com.example.mangaapp.model.Category;
 import com.example.mangaapp.model.Chapter;
 import com.example.mangaapp.model.Manga;
+import com.example.mangaapp.model.User;
 
 import java.util.List;
 
@@ -55,11 +56,14 @@ public class Reponsitory {
         return api.getAllCategory();
     }
 
-    public Observable<List<String>> getImageChapter(int idchapter){
-        return api.getImageChapter(idchapter);
-    }
+    public Observable<List<String>> getImageChapter(int idchapter){ return api.getImageChapter(idchapter); }
 
     public Observable<List<Manga>> getSearch(String name){
         return api.getSearch(name);
     }
+
+    public Observable<User> getUser(String name,String pass){
+        return api.getUser(name,pass);
+    }
+
 }

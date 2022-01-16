@@ -8,11 +8,12 @@
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
-        <androidx.appcompat.widget.AppCompatButton
+        <TextView
             android:id="@+id/button_category"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{category.name}"
+            android:textSize="20dp"
             android:background="@drawable/border_rim_button"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>

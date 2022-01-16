@@ -64,12 +64,13 @@ public class CategoryFragment extends Fragment implements OnClickListener {
             startActivity(intent);
         });
         getDataCategory();
-        getMangaCategory();
+        getMangaCategory("Action");
 
     }
 
-    private void getMangaCategory() {
-        categoryViewModel.fetchMangaCategory("Action").observe((LifecycleOwner) getContext(), mangas -> {
+    private void getMangaCategory(String name) {
+        Log.d("TAG", name);
+        categoryViewModel.fetchMangaCategory(name).observe((LifecycleOwner) getContext(), mangas -> {
             if(mangas == null) return;
             rankingDayAdapter.setArrayList((ArrayList<Manga>) mangas);
         });
@@ -97,6 +98,7 @@ public class CategoryFragment extends Fragment implements OnClickListener {
 
     @Override
     public void onClickCategory(Category category) {
-
+        String name = category.name;
+        getMangaCategory(name);
     }
 }

@@ -21,7 +21,7 @@ import java.util.Locale;
 public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.ViewHolder> {
 
     private Context context;
-    private ArrayList<Manga> arrayList;
+    private ArrayList<Manga> arrayListManga;
     private OnClickListener onClickListener;
 
     public void setOnClickListener(OnClickListener onClickListener) {
@@ -33,7 +33,13 @@ public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.Vi
     }
 
     public void setArrayList(ArrayList<Manga> arrayList) {
-        this.arrayList = arrayList;
+        this.arrayListManga = arrayList;
+        notifyDataSetChanged();
+    }
+
+    public void updateData(ArrayList<Manga> viewModels) {
+        arrayListManga.clear();
+        arrayListManga.addAll(viewModels);
         notifyDataSetChanged();
     }
 
@@ -48,12 +54,12 @@ public class RankingDayAdapter extends RecyclerView.Adapter<RankingDayAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return arrayList != null ? arrayList.size() : 0;
+        return arrayListManga != null ? arrayListManga.size() : 0;
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.setBinding(arrayList.get(position));
+        holder.setBinding(arrayListManga.get(position));
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
