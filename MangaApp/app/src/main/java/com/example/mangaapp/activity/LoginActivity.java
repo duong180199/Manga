@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         String user = String.valueOf(binding.editTextUsername.getText());
         String pass = String.valueOf(binding.editTextPassword.getText());
         binding.buttonLogin.setOnClickListener(v -> {
-            if(checkData(user,pass)) {
+            if(loginViewModel.fetchUser(user,pass)) {
                 Toast.makeText(this, "Success", Toast.LENGTH_LONG).show();
                 Intent intent = new Intent(this, UserFragment.class);
                 startActivity(intent);
@@ -36,14 +36,5 @@ public class LoginActivity extends AppCompatActivity {
             else Toast.makeText(this, "Failed", Toast.LENGTH_LONG).show();
         });
 
-    }
-
-
-    private boolean checkData(String user, String pass) {
-        Log.d("BBBB", String.valueOf(loginViewModel.fetchUser(user,pass)));
-        if(loginViewModel.fetchUser(user,pass)) {
-            return true;
-        }
-        return false;
     }
 }

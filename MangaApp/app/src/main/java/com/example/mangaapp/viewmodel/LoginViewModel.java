@@ -20,8 +20,9 @@ public class LoginViewModel extends ViewModel {
                 .doOnError(throwable -> throwable.printStackTrace())
                 .subscribe(user -> {
                     if(user == null) return;
-
+                    mutableLiveData.setValue(user);
                 });
-        return true;
+        if(mutableLiveData !=null) return true;
+        return false;
     }
 }
